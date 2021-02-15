@@ -26,7 +26,7 @@ trait SymbolTable extends base.SymbolTable {
 
     import base.source.ModuleDecl
     import org.kiama.util.{Entity, ErrorEntity}
-    import scala.collection.immutable.{Seq, Stack}
+    import scala.collection.immutable.Seq
     import source.{ConstDecl, TypeDecl, TypeDef}
 
     /**

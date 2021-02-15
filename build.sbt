@@ -11,7 +11,7 @@ organization in ThisBuild := "com.googlecode.kiama"
 
 // Scala compiler settings
 
-scalaVersion in ThisBuild := "2.11.4"
+scalaVersion in ThisBuild := "2.13.4"
 
 crossScalaVersions := Seq ("2.11.4", "2.10.4")
 
@@ -59,14 +59,16 @@ libraryDependencies in ThisBuild ++= {
         // Profiling:
         "org.bitbucket.inkytonik.dsprofile" %% "dsprofile" % dsprofileVersion,
         // Command-line handling:
-        "org.rogach" %% "scallop" % "0.9.5",
+        "org.rogach" %% "scallop" % "4.0.0",
         // Reflection
         "org.scala-lang" % "scala-reflect" % scalaVersion.value,
         // REPLs:
         "jline" % "jline" % "2.12",
         // Testing:
-        "org.scalacheck" %% "scalacheck" % "1.11.4" % "test",
-        "org.scalatest" %% "scalatest" % "2.2.0" % "test"
+        "org.scalacheck" %% "scalacheck" % "1.15.0" % "test",
+        "org.scalactic" %% "scalactic" % "3.2.3" % "test",
+        "org.scalatestplus" %% "scalacheck-1-15" % "3.2.3.0" % "test",
+        "org.scalatest" %% "scalatest" % "3.2.3" % "test"
     ) ++
         // Parsing:
         parserCombinatorLibrary

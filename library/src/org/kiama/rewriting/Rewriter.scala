@@ -21,6 +21,8 @@
 package org.kiama
 package rewriting
 
+import scala.collection.Factory
+
 /**
  * Strategy-based term rewriting in the style of Stratego (http://strategoxt.org/).
  * The implementation here is partially based on the semantics given in "Program
@@ -605,11 +607,11 @@ trait Rewriter extends RewriterCore {
      * @see RewriterCore.collect
      */
     def collectWithName[CC[X] <: Traversable[X],U] (name : String, f : Any ==> U)
-            (implicit cbf : CanBuildFrom[CC[Any],U,CC[U]]) : Any => CC[U] =
+            (implicit cbf : Factory[U, CC[U]]) : Any => CC[U] =
         (t : Any) => {
-            val b = cbf ()
+            val b = cbf.newBuilder
             def add (u : U) { b += u }
-            (everywhere (query (f andThen add))) (t)
+            (everywhere (query (f.andThen(add(_))))) (t)
             b.result ()
         }
 
@@ -619,11 +621,11 @@ trait Rewriter extends RewriterCore {
      * @see RewriterCore.collectall
      */
     def collectallWithName[CC[X] <: Traversable[X],U] (name : String, f : Any ==> CC[U])
-            (implicit cbf : CanBuildFrom[CC[Any],U,CC[U]]) : Any => CC[U] =
+            (implicit cbf : Factory[U,CC[U]]) : Any => CC[U] =
         (t : Any) => {
-            val b = cbf ()
+            val b = cbf.newBuilder
             def addall (us : CC[U]) { b ++= us }
-            (everywhere (query (f andThen addall))) (t)
+            (everywhere (query (f.andThen(addall(_))))) (t)
             b.result ()
         }
 

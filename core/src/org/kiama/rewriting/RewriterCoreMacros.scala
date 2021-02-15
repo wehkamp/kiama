@@ -23,6 +23,8 @@ package rewriting
 
 import org.kiama.util.Compat210._
 
+import scala.collection.Factory
+
 object RewriterCoreMacros {
 
     import org.bitbucket.inkytonik.dsinfo.DSInfo.{makeCallWithName, makeThisCallWithName}
@@ -261,11 +263,11 @@ object RewriterCoreMacros {
     // Queries
 
     def collectMacro[CC[X] <: Traversable[X],U] (c : blackbox.Context) (f : c.Expr[Any ==> U])
-            (cbf : c.Expr[CanBuildFrom[CC[Any],U,CC[U]]]) : c.Expr[Any => CC[U]] =
+            (cbf : c.Expr[Factory[U,CC[U]]]) : c.Expr[Any => CC[U]] =
         makeCallWithName (c, "this.collectWithName")
 
     def collectallMacro[CC[X] <: Traversable[X],U] (c : blackbox.Context) (f : c.Expr[Any ==> CC[U]])
-            (cbf : c.Expr[CanBuildFrom[CC[Any],U,CC[U]]]) : c.Expr[Any => CC[U]] =
+            (cbf : c.Expr[Factory[U,CC[U]]]) : c.Expr[Any => CC[U]] =
         makeCallWithName (c, "this.collectallWithName")
 
     def countMacro (c : blackbox.Context) (f : c.Expr[Any ==> Int]) : c.Expr[Any => Int] =

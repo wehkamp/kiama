@@ -21,14 +21,15 @@
 package org.kiama
 package util
 
-import org.scalatest.prop.Checkers
-import org.scalatest.{BeforeAndAfter, BeforeAndAfterAll, FunSuiteLike}
+import org.scalatestplus.scalacheck.Checkers
+import org.scalatest.{BeforeAndAfter, BeforeAndAfterAll}
+import org.scalatest.funsuite.AnyFunSuiteLike
 import scala.util.parsing.combinator.RegexParsers
 
 /**
  * General test support.
  */
-trait Tests extends FunSuiteLike with BeforeAndAfter with BeforeAndAfterAll with Checkers {
+trait Tests extends AnyFunSuiteLike with BeforeAndAfter with BeforeAndAfterAll with Checkers {
 
     import org.scalatest.Tag
     import Comparison.{optsame, same}

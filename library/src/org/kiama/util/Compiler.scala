@@ -61,6 +61,7 @@ trait CompilerBase[T, C <: Config] extends Profiler {
      */
     def driver (args : Seq[String]) {
         val config = createConfig (args)
+        config.verify()
         if (config.profile.get != None) {
             val dimensions = parseProfileOption (config.profile ())
             profile (processfiles (config.filenames (), config), dimensions,

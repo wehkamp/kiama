@@ -21,6 +21,8 @@
 package org.kiama
 package util
 
+import scala.util.Random
+
 /**
  * A REPL that uses ScalaCheck to generate random instances of abstract
  * syntax trees of type T and prints them using a configurable emitter.
@@ -52,7 +54,7 @@ trait GeneratingREPLBase[T] extends REPL {
      * the configuration unchanged.
      */
     def processline (line : String, config : REPLConfig) : REPLConfig = {
-        generator.arbitrary (Gen.Parameters.default) match {
+        generator.arbitrary (Gen.Parameters.default, org.scalacheck.rng.Seed.random()) match {
             case Some (t) => process (t, config)
             case None     => config.output.emitln ("can't generate an instance")
         }

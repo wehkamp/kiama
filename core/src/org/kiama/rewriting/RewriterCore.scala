@@ -21,6 +21,8 @@
 package org.kiama
 package rewriting
 
+import scala.collection.Factory
+
 /**
  * Core implementation of strategy-based rewriting. Implement and construct
  * basic strategies and rewrite rules, plus basic library combinators.
@@ -1485,7 +1487,7 @@ trait RewriterCore {
      * accumulated in the collection.
      */
     def collect[CC[X] <: Traversable[X],U] (f : Any ==> U)
-            (implicit cbf : CanBuildFrom[CC[Any],U,CC[U]]) : Any => CC[U] =
+            (implicit cbf : Factory[U,CC[U]]) : Any => CC[U] =
         macro RewriterCoreMacros.collectMacro[CC,U]
 
     /**
@@ -1495,7 +1497,7 @@ trait RewriterCore {
      * are accumulated in the collection.
      */
     def collectall[CC[X] <: Traversable[X],U] (f : Any ==> CC[U])
-            (implicit cbf : CanBuildFrom[CC[Any],U,CC[U]]) : Any => CC[U] =
+            (implicit cbf : Factory[U,CC[U]]) : Any => CC[U] =
         macro RewriterCoreMacros.collectallMacro[CC,U]
 
     /**

@@ -30,7 +30,7 @@ import scala.collection.immutable.Seq
 class CompilerTests extends Tests with CompilerBase[Any,Config] with TestCompiler[Any] {
 
     import java.io.Reader
-    import org.scalatest.TestFailedException
+    import org.scalatest.exceptions.TestFailedException
 
     def createConfig (args : Seq[String],
                       output : Emitter = new OutputEmitter,
@@ -43,6 +43,7 @@ class CompilerTests extends Tests with CompilerBase[Any,Config] with TestCompile
     test ("compiler driver produces an appropriate message if a file is not found") {
         val emitter = new StringEmitter
         val config = createConfig (Seq ("IDoNotExist.txt"), emitter, emitter)
+        config.verify()
         testdriver (config)
         val expectedMsg =
             if (System.getProperty("os.name").startsWith ("Windows"))
@@ -136,6 +137,7 @@ trait TestCompilerWithConfig[T, C <: Config] extends Tests {
             test (title) {
                 val emitter = new StringEmitter
                 val config = createConfig (cmd, emitter, emitter)
+                config.verify()
                 try {
                     testdriver (config)
                 } catch {

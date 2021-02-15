@@ -116,7 +116,7 @@ class Config (args : Seq[String], val output : Emitter, val error : Emitter) ext
     errorMessageHandler =
         (message : String) => {
             error.emitln (s"Command-line error: $message")
-            error.emitln (builder.help)
+//            error.emitln (builder.help)
             sys.exit (1)
         }
 

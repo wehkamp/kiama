@@ -43,12 +43,12 @@ class Compat210 {
      * Provide a link from io.StdIn.readLine to the 2.10 version on
      * the Console object.
      */
-    object io {
-        object StdIn {
-            def readLine (text : String, args : Any*) : String =
-                Console.readLine (text, args)
-        }
-    }
+//    object io {
+//        object StdIn {
+//            def readLine (text : String, args : Any*) : String =
+//                Console.readLine (text, args)
+//        }
+//    }
 
 }
 

@@ -669,7 +669,7 @@ class AttributionTests extends Tests {
         val c1 = Leaf (3)
         val c2 = Leaf (1)
         val c3 = Leaf (10)
-        val c4 = GenSeqTree (Vector (c2, c3).par)
+        val c4 = GenSeqTree (Vector (c2, c3))
         val t = Pair (c1, c4)
         initTree (t)
         assertSame (null) (t.parent)
